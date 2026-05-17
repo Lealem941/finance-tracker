@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const loadUser = async () => {
     try {
-      const res = await axios.get('http://localhost:5001/api/users/me');
+      const res = await axios.get(`${API_URL}/api/users/me`);
       setUser(res.data.data);
       setIsAuthenticated(true);
     } catch (err) {
@@ -36,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5001/api/users', formData);
+      const res = await axios.post(`${API_URL}/api/users`, formData);
       setToken(res.data.data.token);
     } catch (err) {
       throw err.response?.data?.error || 'Registration failed';
@@ -45,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (formData) => {
     try {
-      const res = await axios.post('http://localhost:5001/api/users/login', formData);
+      const res = await axios.post(`${API_URL}/api/users/login`, formData);
       setToken(res.data.data.token);
     } catch (err) {
       throw err.response?.data?.error || 'Login failed';
