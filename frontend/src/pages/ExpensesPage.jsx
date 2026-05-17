@@ -53,7 +53,7 @@ export const ExpensesPage = () => {
               </select>
             </div>
             <div className="form-control">
-              <label>Amount ($)</label>
+              <label>Amount (Birr)</label>
               <input type="number" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" required />
             </div>
             <button className="btn btn-expense">Add Expense</button>
